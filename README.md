@@ -4,13 +4,8 @@ Table of Contents
    * [cbBuildTools](#cbbuildtools)
       * [Screen shots](#screen-shots)
       * [Getting Started](#getting-started)
-         * [Prerequisites](#prerequisites)
-         * [Installing](#installing)
       * [Using the plugin](#using-the-plugin)
-         * [Prerequisites](#prerequisites-1)
-         * [Set up the project](#set-up-the-project)
-         * [User interface](#user-interface)
-         * [Debugging and writing register](#debugging-and-writing-register)
+        * [target window](#target-window)
       * [Contributing](#contributing)
       * [Changelog](#changelog)
       * [Authors](#authors)
@@ -24,8 +19,8 @@ Table of Contents
 Build tools plugin for [Code::Blocks IDE](http://www.codeblocks.org/). 
 
 This plugin extends the build UI for Codeblocks. At the moment it adds following controls:
-- [x] ["Target window"](#target_window).
-- [ ] ["Selective compiling"](#Selective_compiling).
+- [x] ["Target window"](#target-window).
+- [ ] ["Selective compiling"](#Selective-compiling).
 
 ## Screen shots
 
