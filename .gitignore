@@ -1,0 +1,11 @@
+.objs
+plugin_wx30
+plugin_wx28
+doxy
+output
+*.bmarks
+*.depend
+*.layout
+
+cbBuildTools_build_log.html
+cbBuildTools_unix_build_log.html
