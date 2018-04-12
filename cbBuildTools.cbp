@@ -27,7 +27,9 @@
 					<Add directory="$(#cb)/devel" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="zip -j9 $(#cb)\devel/share/codeblocks/cbBuildTools.zip manifest.xml" />
+					<Add after="zip -9  $(#cb)\devel\share\codeblocks\cbBuildTools.zip images\*" />
+					<Add after="zip -j9 $(#cb)\devel\share\codeblocks\cbBuildTools.zip res\*" />
+					<Add after="zip -j9 $(#cb)\devel\share\codeblocks\cbBuildTools.zip manifest.xml" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -52,7 +54,9 @@
 					<Add directory="$(#cb)/devel30" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="zip -j9 $(#cb)\devel30/share/codeblocks/cbBuildTools.zip manifest.xml" />
+					<Add after="zip -9  $(#cb)\devel30\share\codeblocks\cbBuildTools.zip images\*" />
+					<Add after="zip -j9 $(#cb)\devel30\share\codeblocks\cbBuildTools.zip res\*" />
+					<Add after="zip -j9 $(#cb)\devel30\share\codeblocks\cbBuildTools.zip manifest.xml" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -61,7 +65,7 @@
 				<Option object_output=".objs/plugin_wx28" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option host_application="$(#cb)/devel30/codeblocks.exe" />
+				<Option host_application="$(#cb)/devel28/codeblocks.exe" />
 				<Option run_host_application_in_terminal="0" />
 				<Compiler>
 					<Add option="-g" />
