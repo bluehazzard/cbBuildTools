@@ -66,11 +66,19 @@ void BuildTargetsWindow::OnItemActivated(wxTreeEvent& event)
         return;
     }
 
-    //Compiler* tgtCompiler = CompilerFactory::GetCompiler(target->GetCompilerID());
-    // This seems to be a really shady hack... Is the compiler always the same plugin?
-    CompilerGCC* compiler = dynamic_cast<CompilerGCC*>(Manager::Get()->GetPluginManager()->FindPluginByName(_("Compiler")));
-    compiler->Build(target);
-
+    // What if more then one compiler plugin are installed?
+    cbCompilerPlugin* compiler = nullptr;
+    const std::vector<cbCompilerPlugin*> &compilers = Manager::Get()->GetPluginManager()->GetCompilerPlugins();
+    if (!compilers.empty())
+    {
+        compiler = compilers.front();
+        compiler->Build(target);
+    }
+    else
+    {
+        cbMessageBox(_("could not find compiler"), _("Error"));
+        return;
+    }
 }
 
 void BuildTargetsWindow::OnItemContext(wxTreeEvent& event)
@@ -104,12 +112,16 @@ void BuildTargetsWindow::OnItemContext(wxTreeEvent& event)
 
 void BuildTargetsWindow::OnItemContextMenu(wxCommandEvent& event)
 {
-    CompilerGCC* compiler = dynamic_cast<CompilerGCC*>(Manager::Get()->GetPluginManager()->FindPluginByName(_("Compiler")));
-    if(compiler == nullptr)
+    cbCompilerPlugin* compiler = nullptr;
+    const std::vector<cbCompilerPlugin*> &compilers = Manager::Get()->GetPluginManager()->GetCompilerPlugins();
+    if (compilers.empty())
     {
-        cbMessageBox(_("could not find compiler in context menu: ") , _("Error: context menu"));
+        cbMessageBox(_("could not find compiler"), _("Error"));
         return;
     }
+
+    compiler = compilers.front();
+
     // The context menu is hit on a target
     ProjectBuildTarget* target = reinterpret_cast<ProjectBuildTarget*>(static_cast<wxMenu *>(event.GetEventObject())->GetClientData());
     if(target == nullptr)
