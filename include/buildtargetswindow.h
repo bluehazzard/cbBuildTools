@@ -4,6 +4,7 @@
 #include <wx/panel.h>
 #include <wx/treectrl.h>
 #include <sdk.h>
+#include <cbproject.h>
 
 
 class BuildTargetsWindow : public wxPanel
@@ -13,6 +14,7 @@ class BuildTargetsWindow : public wxPanel
         virtual ~BuildTargetsWindow();
 
         void ActivateProject(cbProject* project);
+        void ClearView();
 
     protected:
 

@@ -120,6 +120,7 @@ class cbBuildTools : public cbPlugin
         void OnWindowMenu(wxCommandEvent& event);
 
         void OnProjectActivatedEvent(CodeBlocksEvent& event);
+        void OnProjectCloseEvent(CodeBlocksEvent& event);
 
 
         BuildTargetsWindow*  m_buildTargetsPanel;

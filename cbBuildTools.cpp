@@ -58,11 +58,17 @@ void cbBuildTools::OnAttach()
 
         // EVT_PROJECT_ACTIVATE
     Manager::Get()->RegisterEventSink(cbEVT_PROJECT_ACTIVATE, new cbEventFunctor<cbBuildTools, CodeBlocksEvent>(this, &cbBuildTools::OnProjectActivatedEvent));
+    Manager::Get()->RegisterEventSink(cbEVT_PROJECT_TARGETS_MODIFIED , new cbEventFunctor<cbBuildTools, CodeBlocksEvent>(this, &cbBuildTools::OnProjectActivatedEvent));
+    Manager::Get()->RegisterEventSink(cbEVT_PROJECT_OPEN, new cbEventFunctor<cbBuildTools, CodeBlocksEvent>(this, &cbBuildTools::OnProjectActivatedEvent));
+    Manager::Get()->RegisterEventSink(cbEVT_PROJECT_CLOSE, new cbEventFunctor<cbBuildTools, CodeBlocksEvent>(this, &cbBuildTools::OnProjectCloseEvent));
 
 }
 
 void cbBuildTools::OnRelease(bool appShutDown)
 {
+    if(!appShutDown)
+        Manager::Get()->RemoveAllEventSinksFor(this);
+
     // do de-initialization for your plugin
     // if appShutDown is true, the plugin is unloaded because Code::Blocks is being shut down,
     // which means you must not use any of the SDK Managers
@@ -122,4 +128,9 @@ void cbBuildTools::OnProjectActivatedEvent(CodeBlocksEvent& event)
 {
     cbProject* pCBProject = event.GetProject();
     m_buildTargetsPanel->ActivateProject(pCBProject);
+}
+
+void cbBuildTools::OnProjectCloseEvent(CodeBlocksEvent& event)
+{
+    m_buildTargetsPanel->ClearView();
 }

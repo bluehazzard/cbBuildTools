@@ -1,7 +1,8 @@
 #include "buildtargetswindow.h"
 
 #include <sdk.h> // Code::Blocks SDK
-#include <../plugins/compilergcc/compilergcc.h>
+#include <wx/sizer.h>
+#include <wx/menu.h>
 
 const long BuildTargetsWindow::ID_TREE_CTRL               = wxNewId();
 
@@ -22,7 +23,7 @@ END_EVENT_TABLE()
 
 
 
-BuildTargetsWindow::BuildTargetsWindow(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL/* | wxCLIP_CHILDREN*/)
+BuildTargetsWindow::BuildTargetsWindow(wxWindow* parent) : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL/* | wxCLIP_CHILDREN*/, wxT("buildTargets"))
 {
     wxBoxSizer* bs = new wxBoxSizer(wxVERTICAL);
     m_treeCtrl = new wxTreeCtrl(this, ID_TREE_CTRL);
@@ -36,6 +37,12 @@ BuildTargetsWindow::~BuildTargetsWindow()
     //dtor
     delete m_treeCtrl;
 }
+
+void BuildTargetsWindow::ClearView()
+{
+     m_treeCtrl->DeleteAllItems();
+}
+
 
 void BuildTargetsWindow::ActivateProject(cbProject* project)
 {
