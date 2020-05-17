@@ -74,6 +74,13 @@ void cbBuildTools::OnRelease(bool appShutDown)
     // which means you must not use any of the SDK Managers
     // NOTE: after this function, the inherited member variable
     // m_IsAttached will be FALSE...
+
+    if(m_buildTargetsPanel != nullptr)
+    {
+        delete m_buildTargetsPanel;
+        m_buildTargetsPanel = nullptr;
+    }
+
 }
 
 void cbBuildTools::BuildMenu(wxMenuBar* menuBar)
@@ -126,11 +133,17 @@ void cbBuildTools::OnWindowMenu(wxCommandEvent& event)
 
 void cbBuildTools::OnProjectActivatedEvent(CodeBlocksEvent& event)
 {
+    if(m_buildTargetsPanel == nullptr)
+        return;
+
     cbProject* pCBProject = event.GetProject();
     m_buildTargetsPanel->ActivateProject(pCBProject);
 }
 
 void cbBuildTools::OnProjectCloseEvent(CodeBlocksEvent& event)
 {
+    if(m_buildTargetsPanel == nullptr)
+        return;
+
     m_buildTargetsPanel->ClearView();
 }
